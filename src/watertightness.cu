@@ -1,5 +1,7 @@
 #include "src/utils.hpp"
 
+#define min(a, b) a < b ? a : b
+
 __device__ void cross(
     const float* __restrict__ a, 
     const float* __restrict__ b, 
@@ -115,7 +117,7 @@ void watertightness(
     int n_triangles,
     cudaStream_t stream
 ) {
-    watertightness_kernel<<<32, 512, 0, stream>>>(
+    watertightness_kernel<<<4096, 512, 0, stream>>>(
         ray_origins, 
         ray_directions, 
         triangles, 
